@@ -100,6 +100,17 @@ salvarEdicaoDescricao(item: TarefaModel): void {
   this.editarHoraTarefa = false; // Define editarHoraTarefa como falso para desabilitar o modo de edição
 }
 
+editarDuracao(item: TarefaModel): void {
+  this.editarDuracaoTarefa = true;
+  this.duracaoEditavel = item.duracao;
+}
+
+salvarEdicaoDuracao(item: TarefaModel): void {
+  item.duracao = this.duracaoEditavel;
+  this.editarDuracaoTarefa = false;
+}
+
+
   excluirTarefa(tarefa: TarefaModel): void {
     const confirmacao = window.confirm('Deseja apagar a tarefa?');
     if (confirmacao) {

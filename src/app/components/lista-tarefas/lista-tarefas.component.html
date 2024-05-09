@@ -1,0 +1,97 @@
+<div class="wrapper">
+  <h1>Lista de Tarefas</h1>
+
+  <div class="action-box">
+    <input type="text" placeholder="Título" [(ngModel)]="tituloNovaTarefa">
+    <input type="text" id="descricao" placeholder="Descrição" [(ngModel)]="descricaoNovaTarefa"
+      (keyup.enter)="adicionar()">
+    <input type="date" id="data" [(ngModel)]="dataNovaTarefa" required [min]="dataMinima">
+    <input type="time" id="hora" [(ngModel)]="horaNovaTarefa">
+    <input type="number" id="duracao" [(ngModel)]="duracaoNovaTarefa" placeholder="Duração (minutos)"
+      (keyup.enter)="adicionar()">
+
+    <button type="button" (click)="adicionar()"><i class="fas fa-plus"></i></button>
+  </div>
+
+  <div class="header">
+    <label class="headerItem" for="titulo">Título:</label>
+    <label class="headerItem" for="descricao">Descrição:</label>
+    <label class="headerItem" for="data">Data:</label>
+    <label class="headerItem" for="hora">Hora:</label>
+    <label class="headerItem" for="duracao">Duração (min):</label>
+    <label class="headerItem" for="acoes">Ações:</label>
+  </div>
+
+  <div class="listaTarefas">
+
+    <div *ngFor="let item of svc.lista" class="tarefa" [ngClass]="{ 'texto-riscado': item.concluida }">
+
+      <div class="info">
+        <div class="value">
+          <span *ngIf="!item.editandoTitulo">{{ item.titulo }}</span>
+          <input *ngIf="item.editandoTitulo" type="text" [(ngModel)]="item.titulo"
+            (keyup.enter)="salvarEdicaoTitulo(item)">
+          <button class="editButton" mat-icon-button color="primary" (click)="editarTitulo(item)">
+            <mat-icon>{{ item.editandoTitulo ? 'save' : 'edit' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="value">
+          <span *ngIf="!item.editandoDescricao">{{ item.descricao }}</span>
+          <input *ngIf="item.editandoDescricao" type="text" [(ngModel)]="item.descricao"
+            (keyup.enter)="salvarEdicaoDescricao(item)">
+          <button class="editButton" mat-icon-button color="primary" (click)="editarDescricao(item)">
+            <mat-icon>{{ item.editandoDescricao ? 'save' : 'edit' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="info">
+        <div *ngIf="!item.editandoData" class="value">{{ item.data | date: 'dd/MM/yy' }}
+          <button class="editButton" mat-icon-button color="primary" (click)="editarDataTarefa(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="item.editandoData">
+          <input type="date" [(ngModel)]="novaDataTarefa">
+          <button class="saveButton" mat-icon-button color="primary" (click)="salvarDataTarefa(item)">
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="value">
+          <span *ngIf="!editarHoraTarefa">{{ item.hora }}</span>
+          <input *ngIf="editarHoraTarefa" type="time" [(ngModel)]="horaEditavel" (keyup.enter)="salvarEdicaoHora(item)">
+          <button class="editButton" mat-icon-button color="primary" (click)="editarHora(item)">
+            <mat-icon *ngIf="!editarHoraTarefa">edit</mat-icon>
+            <mat-icon *ngIf="editarHoraTarefa">save</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="value">{{ item.duracao }}
+          <button class="editButton" mat-icon-button color="primary" (click)="editarTarefa(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button (click)="alterarStatus(item)">
+          <i class="fas fa-check" *ngIf="item.concluida"></i>
+          <i class="far fa-check" *ngIf="!item.concluida"></i>
+        </button>
+        <button class="deleteButton" mat-icon-button color="warn" (click)="excluirTarefa(item)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

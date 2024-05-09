@@ -1,0 +1,33 @@
+.wrapper {
+  cursor: pointer; /* Altera o cursor para indicar que a tarefa é clicável */
+}
+
+.tarefa {
+  min-height: 45px;
+  line-height: 45px;
+  margin-bottom: 8px;
+  background: #f2f2f2;
+  border-radius: 3px;
+  padding: 0 15px;
+  font-size: 20px;
+  transition: text-decoration 0.3s ease; /* Adiciona uma transição suave para o efeito de riscado */
+}
+
+.tarefa.concluida {
+  text-decoration: line-through; /* Aplica uma linha através do texto quando a tarefa estiver concluída */
+}
+
+.tabela-tarefas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-tarefas th, .tabela-tarefas td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tabela-tarefas th {
+  background-color: #f2f2f2;
+}

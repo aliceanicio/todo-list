@@ -97,6 +97,11 @@
   width: 15px;
 }
 
+.editButtonGeneral {
+  border: none;
+  cursor: pointer;
+}
+
 .deleteButton {
   border: none;
   cursor: pointer;

@@ -20,6 +20,7 @@ export class ListaTarefasComponent implements OnInit {
   horaEditavel: string = ''; 
   editarDuracaoTarefa: boolean = false;
   duracaoEditavel: number = 0;
+  edicaoGlobal: boolean = false;
 
 
   constructor(public svc: ListaTarefasService) {
@@ -68,11 +69,10 @@ export class ListaTarefasComponent implements OnInit {
   tarefa.editandoTitulo = !tarefa.editandoTitulo;
 }
 
-
   salvarEdicaoTitulo(item: TarefaModel): void {
-  item.editandoTitulo = false;
-  
+  item.editandoTitulo = false; 
 }
+
 editarDescricao(item: TarefaModel): void {
   item.editandoDescricao = true; // Entra no modo de edição da descrição
 }
@@ -110,6 +110,9 @@ salvarEdicaoDuracao(item: TarefaModel): void {
   this.editarDuracaoTarefa = false;
 }
 
+toggleEdicaoInfo(tarefa: TarefaModel): void {
+  tarefa.editandoInfo = !tarefa.editandoInfo;
+}
 
   excluirTarefa(tarefa: TarefaModel): void {
     const confirmacao = window.confirm('Deseja apagar a tarefa?');

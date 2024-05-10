@@ -13,8 +13,8 @@ export class TarefaModel {
   novaHoraTarefa: string = ''; 
   editandoDuracao?: boolean;
   duracaoEditavel: number; 
-editarHoraTarefa: any;
-
+  editarHoraTarefa: any;
+  editandoInfo: boolean = true;
 
   constructor() {
     this.editandoData = false;
